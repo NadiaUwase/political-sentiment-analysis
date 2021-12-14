@@ -66,6 +66,7 @@ s3transfer==0.3.3
 seaborn==0.10.1
 Send2Trash==1.5.0
 six==1.15.0
+scikit_learn==0.24.2
 streamlit==0.61.0
 terminado==0.8.3
 testpath==0.4.4
@@ -82,4 +83,5 @@ wcwidth==0.2.4
 webencodings==0.5.1
 widgetsnbextension==3.5.1
 wincertstore==0.2
+
 

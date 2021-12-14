@@ -18,12 +18,14 @@ import matplotlib.pyplot as plt
 from PIL import Image
 import seaborn as sns
 from datetime import datetime
+from sklearn.linear_model import LogisticRegression
+from sklearn.naive_bayes import MultinomialNB
 
-#if i need to use the model
-# Utils
-import joblib 
-#this is the model from the copy model but i will also try this first one to see if it doesn't work
-log_regr_pl = joblib.load(open("models/tweets_emotions_classifier.pkl","rb"))
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score,classification_report,confusion_matrix
+from sklearn.pipeline import Pipeline
+
 
 consumer_key= 'upWs4iRLt7GNdelig0uZr7OCw'
 consumer_secret= 'zDbYOrPwbVERyskPG71Dz11JIDSTHvMd0olswowdim5RJOiAdM'
@@ -97,8 +99,18 @@ def app():
 
 
             def get_emotion_analysis(tweet_text):
-                tweet_text['emotions_pred']= log_regr_pl.predict(tweet_text['text'])
+                emotions_df = pd.read_csv("emotions_dataset.csv")
+                emotions_df.fillna('', inplace=True)
+                x_features = emotions_df['Clean_Text']
+                y_labels = emotions_df['Emotion']
+                x_train, x_val, y_train, y_val = train_test_split(x_features, y_labels, test_size=0.3, random_state=42)
+                log_regr_pl = Pipeline(steps=[('cv', CountVectorizer()), ('lr', LogisticRegression())])
+                log_regr_pl.fit(x_train, y_train)
+                tweet_text['emotions_pred'] = log_regr_pl.predict(tweet_text['text'])
+
             return tweet_text
+
+
 
         
 

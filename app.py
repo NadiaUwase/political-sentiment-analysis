@@ -27,10 +27,10 @@ from sklearn.metrics import accuracy_score,classification_report,confusion_matri
 from sklearn.pipeline import Pipeline
 
 
-consumer_key= 'upWs4iRLt7GNdelig0uZr7OCw'
-consumer_secret= 'zDbYOrPwbVERyskPG71Dz11JIDSTHvMd0olswowdim5RJOiAdM'
-access_token= '918560003639971842-u3G6jdMhnO6ItaBK3Tlmu2aehPIY2RI'
-access_token_secret= 'G0tUiNkIk3kiAdKk2p5rM7UIo9qxKC5kFv5x1zMiamgfS'
+consumer_key= '****************'
+consumer_secret= '*************'
+access_token= '****************'
+access_token_secret= '*******************'
 auth = tw.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tw.API(auth, wait_on_rate_limit=True)
